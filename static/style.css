@@ -35,7 +35,20 @@ h1 {
 .authors {
   color: #777;
   font-size: 0.85rem;
+  margin: 0 0 4px;
+}
+
+.repo-link {
   margin: 0 0 20px;
+  font-size: 0.85rem;
+}
+
+.repo-link a {
+  color: #1a5fb4;
+}
+
+.repo-link a:hover {
+  text-decoration: underline;
 }
 
 h2 {
@@ -165,6 +178,10 @@ input[type="file"] {
   }
 
   .authors {
+    margin-bottom: 4px;
+  }
+
+  .repo-link {
     margin-bottom: 16px;
   }
 
