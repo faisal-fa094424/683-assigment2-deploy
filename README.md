@@ -33,6 +33,8 @@ The app also supports different explanation levels in the prompt, so answers can
 - OpenAI Embeddings (`text-embedding-3-small`)
 - OpenAI Chat model (`gpt-4o-mini`)
 - PyMuPDF for PDF loading
+- Nginx reverse proxy
+- Linode VM hosting
 
 ## Project structure
 
@@ -99,7 +101,7 @@ This will read all PDFs from `research_papers/` and create a fresh Chroma databa
 python app.py
 ```
 
-By default, the app runs on:
+By default, the Flask app runs on:
 
 ```text
 http://localhost:5000
@@ -115,28 +117,43 @@ http://localhost:5000
 
 ## Deployment
 
-This project can be deployed on any service that supports Python web apps.
+This project is deployed at **qu-assigment.org** using:
 
-### Option 1: Simple server or VM
+- a VM hosted on **Linode**
+- **Nginx** as a reverse proxy
+- the Flask application running locally on port **5000**
 
-Install the dependencies, set the `OPENAI_API_KEY`, build the Chroma database, and run:
+### Production deployment flow
+
+1. Deploy the project files to a Linux VM.
+2. Create a Python virtual environment and install the dependencies.
+3. Add the `.env` file with the `OPENAI_API_KEY` on the server.
+4. Run `create_Vector_DB.py` to build the initial Chroma database.
+5. Start the Flask app on local port `5000`.
+6. Configure **Nginx** to listen on port `443` and forward incoming HTTPS requests to `127.0.0.1:5000`.
+
+### Example Flask app startup
 
 ```bash
 python app.py
 ```
 
-For production, it is better to run Flask behind a production server such as Gunicorn.
-
-Example:
+Or with Gunicorn for production:
 
 ```bash
-gunicorn -b 0.0.0.0:5000 app:app
+gunicorn -b 127.0.0.1:5000 app:app
 ```
 
-### Option 2: Streamlit Cloud or similar platforms
+### Reverse proxy note
 
-This current project is written with Flask, so it is better suited to platforms that support general Python web apps.
-If deployment on Streamlit Cloud is required, the UI would need to be rewritten in Streamlit first.
+The Flask application itself listens on port `5000`.
+In production, users should not access port `5000` directly. Instead, a reverse proxy such as **Nginx** should:
+
+- listen on port `443`
+- handle the SSL/TLS certificate
+- forward the requests to the local Flask service on port `5000`
+
+This is the deployment approach used for **qu-assigment.org**.
 
 ## Notes
 
@@ -144,6 +161,7 @@ If deployment on Streamlit Cloud is required, the UI would need to be rewritten 
 - Uploaded PDFs are also added to the `research_papers` folder after successful processing.
 - The current retrieval uses similarity search from Chroma.
 - The current app expects the HTML template `index.html` to exist in a `templates/` folder.
+- Keep the `.env` file on the server and do not push it to GitHub.
 
 ## Future improvements
 
@@ -152,4 +170,3 @@ If deployment on Streamlit Cloud is required, the UI would need to be rewritten 
 - add source citations directly in the displayed answer
 - add duplicate-file detection by content hash
 - add Docker support for easier deployment
-
