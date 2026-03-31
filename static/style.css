@@ -1,0 +1,193 @@
+/* Base layout */
+body {
+  font-family: Arial, sans-serif;
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 16px;
+  line-height: 1.5;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.qu-logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+h1 {
+  font-size: 1.35rem;
+  margin: 0 0 2px;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 0 0 4px;
+}
+
+.authors {
+  color: #777;
+  font-size: 0.85rem;
+  margin: 0 0 20px;
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.row {
+  margin: 12px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+textarea {
+  width: 100%;
+  min-height: 100px;
+  box-sizing: border-box;
+  padding: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+select {
+  padding: 6px 10px;
+  font-size: 1rem;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 8px 14px;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  box-sizing: border-box;
+}
+
+input[type="file"] {
+  max-width: 100%;
+  font-size: 0.95rem;
+}
+
+.msg {
+  margin-top: 14px;
+  font-weight: 600;
+}
+
+.ok {
+  color: #0a7a2f;
+}
+
+.err {
+  color: #b42318;
+}
+
+.answer {
+  margin-top: 12px;
+  white-space: pre-wrap;
+  font-weight: normal;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.sources {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #444;
+  font-weight: normal;
+  white-space: pre-wrap;
+  font-family: ui-monospace, monospace;
+  overflow-x: auto;
+}
+
+.context-debug {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: #333;
+  font-weight: normal;
+}
+
+.context-debug pre {
+  margin: 8px 0 0;
+  padding: 10px;
+  background: #f6f6f6;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Phone and small tablets */
+@media (max-width: 600px) {
+  body {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .qu-logo {
+    height: 48px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .authors {
+    margin-bottom: 16px;
+  }
+
+  .card {
+    padding: 14px 12px;
+  }
+
+  h2 {
+    font-size: 1.05rem;
+  }
+
+  textarea {
+    min-height: 120px;
+    font-size: 16px; /* avoids iOS zoom-on-focus */
+  }
+
+  select,
+  input[type="file"] {
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+    justify-content: center;
+  }
+}
