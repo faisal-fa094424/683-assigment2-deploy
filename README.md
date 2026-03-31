@@ -132,41 +132,4 @@ This project is deployed at **qu-assigment.org** using:
 5. Start the Flask app on local port `5000`.
 6. Configure **Nginx** to listen on port `443` and forward incoming HTTPS requests to `127.0.0.1:5000`.
 
-### Example Flask app startup
 
-```bash
-python app.py
-```
-
-Or with Gunicorn for production:
-
-```bash
-gunicorn -b 127.0.0.1:5000 app:app
-```
-
-### Reverse proxy note
-
-The Flask application itself listens on port `5000`.
-In production, users should not access port `5000` directly. Instead, a reverse proxy such as **Nginx** should:
-
-- listen on port `443`
-- handle the SSL/TLS certificate
-- forward the requests to the local Flask service on port `5000`
-
-This is the deployment approach used for **qu-assigment.org**.
-
-## Notes
-
-- The script removes pages that appear to be bibliography/reference pages before embedding.
-- Uploaded PDFs are also added to the `research_papers` folder after successful processing.
-- The current retrieval uses similarity search from Chroma.
-- The current app expects the HTML template `index.html` to exist in a `templates/` folder.
-- Keep the `.env` file on the server and do not push it to GitHub.
-
-## Future improvements
-
-- add hybrid retrieval (dense + BM25)
-- add configurable top-k retrieval from the UI
-- add source citations directly in the displayed answer
-- add duplicate-file detection by content hash
-- add Docker support for easier deployment
